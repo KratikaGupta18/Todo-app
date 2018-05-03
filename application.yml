@@ -1,0 +1,52 @@
+---
+# Items that apply to ALL profiles:
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8011/eureka/
+
+---
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:37017/test
+
+---
+---
+spring:
+  datasource:
+     hikari:
+      jdbc-url: jdbc:h2:~/testdb
+    
+   
+  jpa:
+   show-sql: true
+
+# spring:
+#   datasource:
+#     driver-class-name: com.mysql.jdbc.Driver
+#     url: jdbc:mysql://127.0.0.1:3306/ibmms
+#     username: admin
+#     password: admin
+#   jpa:
+#    show-sql: true   
+---
+spring:
+  cloud:
+    stream:
+      bindings:
+        paymentsChannel:
+         binder: rabbit
+         destination: newpayment.ms.exchange
+         content-type: application/json
+         group: ibm.bharatiya    
+
+---
+spring:
+  zipkin:
+    base-url: http://localhost:8085
+  sleuth:
+    sampler:
+      percentage: 1.0   
+        
+
